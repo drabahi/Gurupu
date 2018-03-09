@@ -1,0 +1,73 @@
+---
+- name: Challenge4 webserver
+  hosts: webserver
+  tasks:
+    - name: install http
+      become: true
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - httpd
+        - mod_ssl
+        - php
+        - php-mysql
+        - mariadb
+        - libsemanage-python
+    - name: activation firewall
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        permanent: true
+        immediate: true
+      with_items:
+        - http
+        - https
+    - name: demarrage service
+      become: true
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: lecture du fichier php
+      become: true
+      copy:
+        src: files/index.php
+        dest: /var/www/html/
+    - name: selinux
+      seboolean:
+        name: "{{ item }}"
+        state: yes
+        persistent: yes
+      with_items:
+        - httpd_can_network_connect
+        - httpd_can_network_connect_db
+
+- name: Challenge4 mariadb
+  hosts: mariadb
+  tasks:
+    - name: install mariadb
+      become: true
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - mariadb-server
+        - MySQL-python
+    - name: activation des firewall
+      firewalld:
+        service: mysql
+        state: enabled
+        immediate: true
+        permanent: true
+    - name: activation service
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+    - name: creation user
+      mysql_user:
+        name: 'devops'
+        password: 'redhat'
+        host: '%'
+...

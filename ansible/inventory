@@ -1,0 +1,6 @@
+[webserver]
+node1
+
+[mariadb]
+node2
+
