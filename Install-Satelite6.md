@@ -1,8 +1,26 @@
-# <span style='color:red'>Installation de Tower</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# <span style='color:red'>Installation de Satellite</span>
 
 Groupe 1 - GURUPU
 
+<div style="page-break-after: always;"></div>
+
 [TOC]
+
+<div style="page-break-after: always;"></div>
 
 <b style='color:green'>Distribution</b>
 
@@ -20,7 +38,7 @@ Des copies supplémentaires de ce document peuvent être offerte a tous.
 
 Gurupu, 6/03/18, version 1
 
-
+<div style="page-break-after: always;"></div>
 
 ## 1. A propos de ce document
 
@@ -52,7 +70,7 @@ Les serveurs ont la configuration suivante:
 
 Le serveur a été installé en Red Hat 7.4 x86_64 avec une installation minimal.
 
-
+<div style="page-break-after: always;"></div>
 
 ## 3. Installation de Satellite
 
@@ -63,7 +81,7 @@ The following requirements apply to the networked base system:
 - 64-bit architecture
 - The latest version of Red Hat Enterprise Linux 6 Server or 7 Server
 - A minimum of 2 CPU cores, 4 CPU cores are recommended
-- A minimum of 12 GB memory is required for the Satellite Server to function, 16 GB of memory or more is recommended (ألا أيها الظالم المستبد) for each instance of Satellite Server. In addition, a minimum of 4 GB of swap space is also recommended. Satellite running with less memory than the minimum value may not operate correctly.
+- A minimum of 12 GB memory is required for the Satellite Server to function, 16 GB of memory or more is recommended for each instance of Satellite Server. In addition, a minimum of 4 GB of swap space is also recommended. Satellite running with less memory than the minimum value may not operate correctly.
 
 
 - A unique host name, which can contain lower-case letters, numbers, dots (.) and hyphens (-)
@@ -76,8 +94,6 @@ The following requirements apply to the networked base system:
 
 Before you install Satellite Server or Capsule Server, you should ensure that your environment meets
 the requirements for installation.
-
-
 
 ### 3.2 Emplacement pour Satellite
 
@@ -98,7 +114,7 @@ mkfs.xfs /dev/vg/lvol0
 
 Montage du disque sur /var dans /etc/fstab
 
-
+<div style="page-break-after: always;"></div>
 
 ## 4. Installation Satellite 6
 
@@ -140,13 +156,13 @@ Dans les resultats selectionner le x86_64  ->  *Create selected*
 
 *Create*
 
-
+<div style="page-break-after: always;"></div>
 
 ## 5. Ajout d'un client CentOs
 
 ### 5.1 Configuration de la machine 
 
-#####Sur node3 
+#####		Sur node3 
 
 ```
 yum -y install subscription-manager
@@ -157,15 +173,13 @@ subscription-manager register --org "Default_Orgnaization"
 yum -y install katello-agent
 ```
 
-#####Dans l'interface Satellite
+#####		Dans l'interface Satellite
 
 *Hosts*  -> *Content Hosts*
 
 *Subcriptions*  ->  *Subcriptions*  -> *Add*
 
 Dans la liste des repos selectionner CentOs7
-
-
 
 ### Annexe
 
