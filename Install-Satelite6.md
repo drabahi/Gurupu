@@ -54,9 +54,9 @@ Le serveur a été installé en Red Hat 7.4 x86_64 avec une installation minimal
 
 
 
-## 3. Installation de Satelite
+## 3. Installation de Satellite
 
-### 3.1 System requirements
+### 3.1 Systeme requis
 
 The following requirements apply to the networked base system:
 
@@ -71,17 +71,19 @@ The following requirements apply to the networked base system:
 - Administrative user (root) access
 - A system umask of 0022
 - Full forward and reverse DNS resolution using a fully-qualified domain name
+- Attention la langue doit etre en anglais (en_US.UTF-8)
+- The locale must be en_US.UTF-8
 
 Before you install Satellite Server or Capsule Server, you should ensure that your environment meets
 the requirements for installation.
 
 
 
-### 3.2 Storage for Satelite
+### 3.2 Emplacement pour Satellite
 
 Ajout d'un disque dur de 600 Go monter sur /var
 
-/var doit etre monte sur du LVM pour etre extensible et formater en xfs pour eviter la limitation d'inode lié a ext4.
+/var doit etre monte sur du LVM pour etre extensible et formater en xfs pour eviter la limitation d'inode liée a ext4.
 
 #### 3.2.1 Creation Lvm
 
@@ -117,12 +119,57 @@ firewall-cmd --reload
 selinux --enforcing
 ```
 
-### 4.2 Configuration initial du server Saltelite
+### 4.2 Configuration initiale du serveur Satellite
 
 ```
 satellite-installer --scenario satellite --foreman-admin-username admin --
 foreman-admin-password redhat
 ```
+
+#### 4.2.1 Interface Satellite
+
+Se connecter a https://stallite.classroom.local
+
+Dans *Content* - *Products*  ->  *Repo Discovery*  
+
+Copier l'url http://mirror.centos.org/centos/7/os  ->  Discover
+
+Dans les resultats selectionner le x86_64  ->  *Create selected*
+
+​	Name: CentOs7
+
+*Create*
+
+
+
+## 5. Ajout d'un client CentOs
+
+### 5.1 Configuration de la machine 
+
+#####Sur node3 
+
+```
+yum -y install subscription-manager
+yum -y localinstall http://stallite.classroom.local/pub/katello-ca-consumer-latest.noarch.rpm
+subscription-manager register --org "Default_Orgnaization"
+	login: admin
+	password: redhat
+yum -y install katello-agent
+```
+
+#####Dans l'interface Satellite
+
+*Hosts*  -> *Content Hosts*
+
+*Subcriptions*  ->  *Subcriptions*  -> *Add*
+
+Dans la liste des repos selectionner CentOs7
+
+
+
+### Annexe
+
+Attention Riad au nom du satellite !! stallite.classroom.local
 
 
 
